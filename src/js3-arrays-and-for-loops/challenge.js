@@ -2,6 +2,9 @@
  *  & calling your own functions.
  */
 
+import { join } from "path";
+import { number } from "yargs";
+
 /* 
   All challenges in this repository are seperated into four levels: Foundation, Intermediate, Advanced and Expert.
   The expectation is to complete all Foundation level challenges, with Intermediate and upwards pushing your knowledge
@@ -22,7 +25,9 @@
  */
 
 export const createRecipeString = (ingredientsArr) => {
-  return;
+  const recipe = ingredientsArr.join("+");
+
+  return recipe;
 };
 
 /**
@@ -33,7 +38,10 @@ export const createRecipeString = (ingredientsArr) => {
  */
 
 export const getFirstAndLastItems = (itemsArr) => {
-  return;
+  const arrayLength = itemsArr.length;
+  const firstAndLastItems = [itemsArr[0], itemsArr[arrayLength - 1]];
+
+  return firstAndLastItems;
 };
 
 /**
@@ -44,7 +52,13 @@ export const getFirstAndLastItems = (itemsArr) => {
  */
 
 export const totalScores = (scoreArr) => {
-  return;
+  let totalScore = 0;
+
+  scoreArr.forEach((element) => {
+    totalScore = totalScore + element
+  });
+
+  return totalScore;
 };
 
 /**
@@ -60,7 +74,12 @@ export const totalScores = (scoreArr) => {
  */
 
 export const totalRange = (rangeMax) => {
-  return;
+  let total = 0;
+  
+  for (let index = 0; index <= rangeMax; index++) {
+    total = total + index;
+  };
+  return total;
 };
 
 /**
@@ -71,7 +90,16 @@ export const totalRange = (rangeMax) => {
  */
 
 export const moveFirstAndLastItems = (itemsArr) => {
-  return;
+  const arrayLength = itemsArr.length;
+  const lastItem = itemsArr[arrayLength - 1];
+  let newArray = [lastItem];
+
+  itemsArr.forEach((element, index) => {
+    if(index < arrayLength - 1) {
+      newArray.push(element);
+    }
+  });
+  return newArray;
 };
 
 /**
@@ -89,7 +117,14 @@ export const moveFirstAndLastItems = (itemsArr) => {
  */
 
 export const removeEvenNumbers = (numberArr) => {
-  return;
+  const cloneNumberArr = [];
+
+  numberArr.forEach((element) => {
+    if(element % 2 != 0) {
+      cloneNumberArr.push(element);
+    }
+  })
+  return cloneNumberArr;
 };
 
 /**
@@ -105,7 +140,19 @@ export const removeEvenNumbers = (numberArr) => {
  */
 
 export const generateAverage = (numberArr) => {
-  return;
+  const cloneNumberArr = [...numberArr];
+  const initialValue = 0;
+  if (numberArr.length == 0) {
+    return 0;
+  }
+  const arrayTotal = cloneNumberArr.reduce(
+    (previousValue, currentVale) => previousValue + currentVale,
+    initialValue
+  );
+
+  const arrayAverage = Math.round(arrayTotal / numberArr.length);
+
+  return arrayAverage;
 };
 
 /**
@@ -116,7 +163,13 @@ export const generateAverage = (numberArr) => {
  */
 
 export const reverseOrder = (toReverseArr) => {
-  return;
+  const reversedArray = [];
+
+  for (let index = toReverseArr.length; index > 0; index--) {
+    reversedArray.push(toReverseArr[index - 1]);    
+  }
+
+  return reversedArray;
 };
 
 /**
@@ -138,7 +191,18 @@ export const reverseOrder = (toReverseArr) => {
  */
 
 export const generateHighscores = (playersArr, scoresArr) => {
-  return;
+  if (playersArr.length != scoresArr.length || !playersArr.length) {
+    return "invalid inputs";
+  }
+
+  const highScoreArray = []
+
+  for (let index = 0; index < playersArr.length; index++) {
+    const element = `P:${index + 1} ${playersArr[index]} scored ${scoresArr[index]}`;
+    highScoreArray.push(element);    
+  }
+
+  return highScoreArray;
 };
 
 /**
@@ -167,6 +231,26 @@ export const generateHighscores = (playersArr, scoresArr) => {
 //   return;
 // };
 
+
 export const encryptString = (toEncrypt) => {
-  return;
+  if (toEncrypt.length <= 3) {
+    const unEncrypted = [...toEncrypt]
+    return unEncrypted.join('');
+  }
+
+  const toEncryptArr = [...toEncrypt];
+  
+  const list1 = [];
+  const list2 = [];
+  const list3 = [];
+
+  for (let index = 0; index < toEncryptArr.length; index += 3) {
+    list1.push(toEncryptArr[index]);
+    list2.push(toEncryptArr[index + 1]);
+    list3.push(toEncryptArr[index + 2]);    
+  }
+
+  const encryptedString = list1.concat(list2, list3);
+
+  return encryptedString.join('');
 };
